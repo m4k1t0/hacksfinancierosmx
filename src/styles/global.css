@@ -1,0 +1,651 @@
+/* ===== RESET ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family: system-ui, sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color:#f8fafc;
+}
+
+a{text-decoration:none;color:inherit}
+
+/* ===== NAVBAR ===== */
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  backdrop-filter: blur(12px);
+  background: rgba(6, 19, 35);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
+.nav{
+  max-width:1100px;
+  margin:auto;
+  padding:0.7rem 1rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between; /* FIX */
+ 
+}
+
+/* BRAND */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  white-space:nowrap;
+}
+
+.brand img{
+  height:100px;
+}
+
+.brand span{
+  font-weight:600;
+  font-size:0.9rem;
+}
+
+/* MENU */
+.menu{
+  display:flex;
+  gap:0.5rem;
+  overflow-x:auto;
+  padding:0.2rem;
+  flex:1;
+}
+
+.menu::-webkit-scrollbar{
+  height:4px;
+}
+.menu::-webkit-scrollbar-thumb{
+  background:#1e293b;
+  border-radius:10px;
+}
+
+/* pills */
+.menu a{
+  flex-shrink:0;
+  font-size:1rem;
+  font-family: sans-serif;
+  padding:0.3rem 0.65rem;
+  border-radius:999px;
+  color:rgba(39, 209, 190);
+  background:#06091c;
+  border:1px solid transparent;
+  transition:all 0.2s ease;
+}
+
+/* hover */
+.menu a:hover{
+  color:rgba(20, 114, 146);
+  border-color:rgba(20, 114, 146);
+  background:rgba(0,245,160,0.08);
+}
+
+/* activo */
+.menu a.active{
+  background:rgba(39, 209, 190);
+  color:#020617;
+  font-weight:600;
+  border:none;
+}
+
+/* BOTÓN */
+.toggle{
+  display:none;
+  background:#0f172a;
+  border:1px solid #1e293b;
+  color:#94a3b8;
+  font-size:1.1rem;
+  padding:6px 10px;
+  border-radius:8px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:700px){
+
+  .title img{
+    max-width: -webkit-fill-available;
+  }
+
+  .toggle{
+    display:block;
+  }
+
+  .menu{
+    position:absolute;
+    top:100px; /* FIX */
+    left:0;
+    right:0;
+
+    background: rgba(6,19,35,0.98);
+    backdrop-filter: blur(10px);
+
+    border-top:1px solid #1e293b;
+
+    display:none;
+    flex-direction:column;
+    padding:0.5rem;
+    gap:0.4rem;
+  }
+
+  .menu.active{
+    display:flex;
+  }
+
+  .menu a{
+    width:100%;
+    padding:0.6rem 0.8rem;
+    border-radius:10px;
+    background:#0f172a;
+    font-size:0.9rem;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .menu a:hover{
+    background:rgba(39,209,190,0.15);
+  }
+
+  .menu a.active{
+    background:rgba(39,209,190,0.9);
+    color:#020617;
+  }
+}
+
+/* ===== MAIN ===== */
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:2rem 1rem;
+}
+
+/*______________________*/
+
+.title,h1 {
+  margin-bottom: 2rem;
+  color: rgba(39, 209, 190);;
+}
+
+
+h2 {
+  color: rgba(20, 114, 146);
+}
+
+h3 {
+  color: rgba(39, 209, 190);;
+}
+h1,h2,h3{
+    text-transform: capitalize;
+  }
+/* GRID */
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+/* CARD */
+.card {
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  transition: all 0.25s ease;
+}
+
+/* hover */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  border-color: rgba(20, 114, 146);
+}
+
+/* imagen */
+.image {
+  height: 180px;
+  overflow: hidden;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* contenido */
+.content {
+  padding: 1.2rem;
+}
+
+.tag {
+  font-size: 0.7rem;
+  color: rgba(20, 114, 146);
+  text-transform: uppercase;
+}
+
+/* título */
+.card h2 {
+  margin: 0.5rem 0;
+  color: rgba(39, 209, 190);
+  font-size: 1.2rem;
+}
+
+/* descripción */
+.card p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+/* paginación */
+.pagination {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pagination a {
+  padding: 0.5rem 0.8rem;
+  background: rgba(6, 19, 35);
+  border-radius: 8px;
+  color: #cbd5f5;
+}
+
+.pagination a.active {
+  background: rgba(20, 114, 146);
+  color: rgba(39, 209, 190);
+}
+
+/* ===== RESET ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family: system-ui, sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color:#f8fafc;
+}
+
+a{text-decoration:none;color:inherit}
+
+/* ===== NAVBAR ===== */
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  backdrop-filter: blur(12px);
+  background: rgba(6, 19, 35);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
+.nav{
+  max-width:1100px;
+  margin:auto;
+  padding:0.7rem 1rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between; /* FIX */
+ 
+}
+
+/* BRAND */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  white-space:nowrap;
+}
+
+.brand img{
+  height:100px; /* 🔥 FIX LOGO */
+}
+
+.brand span{
+  font-weight:600;
+  font-size:0.9rem;
+}
+
+/* MENU */
+.menu{
+  display:flex;
+  gap:0.5rem;
+  overflow-x:auto;
+  padding:0.2rem;
+  flex:1;
+}
+
+.menu::-webkit-scrollbar{
+  height:4px;
+}
+.menu::-webkit-scrollbar-thumb{
+  background:#1e293b;
+  border-radius:10px;
+}
+
+/* pills */
+.menu a{
+  flex-shrink:0;
+  font-size:1rem;
+  font-family: sans-serif;
+  padding:0.3rem 0.65rem;
+  border-radius:999px;
+  color:rgba(39, 209, 190);
+  background:#06091c;
+  border:1px solid transparent;
+  transition:all 0.2s ease;
+}
+
+/* hover */
+.menu a:hover{
+  color:rgba(20, 114, 146);
+  border-color:rgba(20, 114, 146);
+  background:rgba(0,245,160,0.08);
+}
+
+/* activo */
+.menu a.active{
+  background:rgba(39, 209, 190);
+  color:#020617;
+  font-weight:600;
+  border:none;
+}
+
+/* BOTÓN */
+.toggle{
+  display:none;
+  background:#0f172a;
+  border:1px solid #1e293b;
+  color:#94a3b8;
+  font-size:1.1rem;
+  padding:6px 10px;
+  border-radius:8px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:700px){
+
+  .title img{
+    max-width: -webkit-fill-available;
+  }
+
+  h1{
+    font-size: 1.1rem;
+  }
+
+  .toggle{
+    display:block;
+  }
+
+  .menu{
+    position:absolute;
+    top:100px; /* FIX */
+    left:0;
+    right:0;
+
+    background: rgba(6,19,35,0.98);
+    backdrop-filter: blur(10px);
+
+    border-top:1px solid #1e293b;
+
+    display:none;
+    flex-direction:column;
+    padding:0.5rem;
+    gap:0.4rem;
+  }
+
+  .menu.active{
+    display:flex;
+  }
+
+  .menu a{
+    width:100%;
+    padding:0.6rem 0.8rem;
+    border-radius:10px;
+    background:#0f172a;
+    font-size:0.9rem;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  .menu a:hover{
+    background:rgba(39,209,190,0.15);
+  }
+
+  .menu a.active{
+    background:rgba(39,209,190,0.9);
+    color:#020617;
+  }
+}
+
+/* ===== MAIN ===== */
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:2rem 1rem;
+}
+
+/*______________________*/
+
+.title {
+  margin-bottom: 2rem;
+  color: rgba(20, 114, 146);
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+/* CARD */
+.card {
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  transition: all 0.25s ease;
+}
+
+/* hover */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  border-color: rgba(20, 114, 146);
+}
+
+/* imagen */
+.image {
+  height: 180px;
+  overflow: hidden;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* contenido */
+.content {
+  padding: 1.2rem;
+}
+
+.tag {
+  font-size: 0.7rem;
+  color: rgba(20, 114, 146);
+  text-transform: uppercase;
+}
+
+/* título */
+.card h2 {
+  margin: 0.5rem 0;
+  color: rgba(39, 209, 190);
+  font-size: 1.2rem;
+}
+
+/* descripción */
+.card p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+/* paginación */
+.pagination {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pagination a {
+  padding: 0.5rem 0.8rem;
+  background: rgba(6, 19, 35);
+  border-radius: 8px;
+  color: #cbd5f5;
+}
+
+.pagination a.active {
+  background: rgba(20, 114, 146);
+  color: rgba(39, 209, 190);
+}
+
+/* ========================= */
+/* MARKDOWN REAL (ESTILO PRO) */
+/* ========================= */
+
+.markdown {
+  max-width: 840px;
+  margin: auto;
+  line-height: 1.7;
+}
+
+/* ===== TEXT ===== */
+.markdown p {
+  margin: 1rem 0;
+  color: #cbd5f5;
+}
+
+/* ===== HEADINGS (ajuste fino) ===== */
+.markdown h1 {
+  margin-top: 2rem;
+}
+
+.markdown h2 {
+  margin-top: 2rem;
+}
+
+.markdown h3 {
+  margin-top: 1.5rem;
+}
+
+/* ===== LINKS ===== */
+.markdown a {
+  color: rgba(39, 209, 190);
+  border-bottom: 1px solid rgba(39, 209, 190, 0.4);
+  transition: 0.2s;
+}
+
+.markdown a:hover {
+  color: rgba(20, 114, 146);
+}
+
+/* ===== LISTAS ===== */
+.markdown ul,
+.markdown ol {
+  margin: 1rem 0 1rem 1.5rem;
+}
+
+.markdown li {
+  margin: 0.4rem 0;
+  color: #cbd5f5;
+}
+
+/* ===== BLOCKQUOTE (MUY IMPORTANTE PARA BLOG) ===== */
+.markdown blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-left: 3px solid rgba(39, 209, 190);
+  background: rgba(39, 209, 190, 0.05);
+  border-radius: 6px;
+  color: #cbd5f5;
+}
+
+/* ===== CÓDIGO ===== */
+.markdown code {
+  background: #020617;
+  padding: 3px 6px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: rgba(39, 209, 190);
+}
+
+.markdown pre {
+  background: #020617;
+  padding: 1rem;
+  border-radius: 10px;
+  overflow-x: auto;
+  border: 1px solid #1e293b;
+  margin: 1.5rem 0;
+}
+
+.markdown pre code {
+  background: none;
+  padding: 0;
+}
+
+/* ===== IMÁGENES ===== */
+.markdown .img-icon {
+  width: 100px;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  padding: 5px;
+  border-bottom: solid rgba(39, 209, 190);
+  border-right: solid rgba(39, 209, 190);
+  background-color: rgb(221, 210, 210);
+}
+
+.markdown img {
+  width: 100%;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  
+}
+
+/* ===== HR ===== */
+.markdown hr {
+  border: none;
+  border-top: 1px solid #1e293b;
+  margin: 2rem 0;
+}
+
+/* ===== TABLAS (IMPORTANTE PARA FINANZAS) ===== */
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.markdown th,
+.markdown td {
+  padding: 0.7rem;
+  border: 1px solid #1e293b;
+  text-align: left;
+}
+
+.markdown th {
+  background: rgba(39, 209, 190, 0.1);
+  color: rgba(39, 209, 190);
+}
+
+/* ===== DESTACADOS (TIPO BLOG FINTECH) ===== */
+.markdown strong {
+  color: rgba(39, 209, 190);
+}
+
+.markdown em {
+  color: #94a3b8;
+}

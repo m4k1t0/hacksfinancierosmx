@@ -16,7 +16,7 @@ const { post } = Astro.props;
 
 const { Content } = await render(post);
 
-// 👇 breadcrumb multinivel
+// breadcrumb multinivel
 const parts = post.id.split('/');
 ---
 
@@ -43,12 +43,16 @@ const parts = post.id.split('/');
     })}
   </p>
 
+  
+
+  <!-- 🔥 AQUÍ ESTÁ EL FIX -->
+  <article class="markdown">
   <!-- 🧠 CONTENIDO -->
   <h1>{post.data.title}</h1>
   <p>{post.data.description}</p>
 
   <hr />
-
-  <Content />
+    <Content />
+  </article>
 
 </BlogLayout>
