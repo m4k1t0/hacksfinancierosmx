@@ -1,0 +1,54 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+// SSG = Static Site Generation (generación estática)
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+const { Content } = await render(post);
+
+// 👇 breadcrumb multinivel
+const parts = post.id.split('/');
+---
+
+<BlogLayout frontmatter={post.data}>
+
+  <!-- 🔗 BREADCRUMB -->
+  <p class="category">
+    <a href="/">Inicio</a>
+
+    {parts.map((part, index) => {
+      const path = parts.slice(0, index + 1).join('/');
+      const isLast = index === parts.length - 1;
+
+      return (
+        <>
+          {" / "}
+          {isLast ? (
+            <span>{part}</span>
+          ) : (
+            <a href={`/${path}`}>{part}</a>
+          )}
+        </>
+      );
+    })}
+  </p>
+
+  <!-- 🧠 CONTENIDO -->
+  <h1>{post.data.title}</h1>
+  <p>{post.data.description}</p>
+
+  <hr />
+
+  <Content />
+
+</BlogLayout>

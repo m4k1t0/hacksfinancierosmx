@@ -1,0 +1,174 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../layouts/BlogLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+
+  const paths = new Set();
+
+  posts.forEach(post => {
+    const parts = post.id.split('/');
+    for (let i = 1; i <= parts.length - 1; i++) {
+      paths.add(parts.slice(0, i).join('/'));
+    }
+  });
+
+  return Array.from(paths).map(path => ({
+    params: { category: path }
+  }));
+}
+
+const { category } = Astro.params;
+const allPosts = await getCollection('blog');
+
+// posts dentro de esta categoría
+const filtered = allPosts.filter(post =>
+  post.id.startsWith(category + '/')
+);
+
+// separar por siguiente nivel
+const groups = {};
+
+filtered.forEach(post => {
+  const rest = post.id.replace(category + '/', '');
+  const parts = rest.split('/');
+
+  const key = parts.length > 1 ? parts[0] : 'general';
+
+  if (!groups[key]) groups[key] = [];
+  groups[key].push(post);
+});
+---
+
+<BlogLayout frontmatter={{ title: category }}>
+
+  <h1 class="title">{category}</h1>
+
+  <div class="grid">
+
+    {/* 🔷 SUBCATEGORÍAS */}
+    {Object.keys(groups)
+      .filter(g => g !== 'general')
+      .map(group => {
+
+        const base = category.split('/')[0];
+        const imgPath = `/images/${base}/${group}/logo.png`;
+
+        return (
+          <a class="card" href={`/${category}/${group}`}>
+
+            <div class="image">
+              <img 
+                src={imgPath}
+                alt={group}
+                onerror="this.src='/images/default.png'"
+              />
+            </div>
+
+            <div class="content">
+              <span class="tag">
+                {base === 'bancos' ? 'Banco' : 'Categoría'}
+              </span>
+
+              <h3>{group}</h3>
+            </div>
+
+          </a>
+        );
+      })}
+
+    {/* 🔷 POSTS DIRECTOS */}
+    {groups.general && groups.general.map(post => (
+      <a class="card" href={`/blog/${post.id}`}>
+
+        <div class="image">
+          <img 
+            src={post.data.image || "/images/default.png"} 
+            alt={post.data.title}
+          />
+        </div>
+
+        <div class="content">
+          <span class="tag">
+            {post.id.split('/')[0]}
+          </span>
+
+          <h3>{post.data.title}</h3>
+          <p>{post.data.description}</p>
+        </div>
+
+      </a>
+    ))}
+
+  </div>
+
+</BlogLayout>
+
+<style>
+.title {
+  margin-bottom: 2rem;
+  text-transform: capitalize;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* CARD */
+.card {
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #111827;
+  border: 1px solid #1f2937;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #38bdf8;
+  background: #0b1220;
+}
+
+/* IMAGE */
+.image {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #020617;
+}
+
+.image img {
+  max-height: 70px;
+  max-width: 80%;
+  object-fit: contain;
+}
+
+/* CONTENT */
+.content {
+  padding: 1rem;
+}
+
+.tag {
+  font-size: 0.7rem;
+  color: #60a5fa;
+  text-transform: uppercase;
+}
+
+/* TEXT */
+.card h3 {
+  margin: 0.5rem 0;
+  color: #f9fafb;
+  font-size: 1.05rem;
+}
+
+.card p {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+</style>
