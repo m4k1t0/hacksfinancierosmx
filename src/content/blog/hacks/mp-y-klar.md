@@ -10,7 +10,7 @@ subcategory: "hacks"
 type: "guia"
 entity: ["Mercado Pago", "Klar"]
 status: "evergreen"
--------------------
+---
 
 ## Tienes que saber que...
 
